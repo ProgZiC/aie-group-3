@@ -185,6 +185,44 @@ def compute_quality_flags(summary: DatasetSummary, missing_df: pd.DataFrame) -> 
     flags["max_missing_share"] = max_missing_share
     flags["too_many_missing"] = max_missing_share > 0.5
 
+    #НОВЫЕ ЭВРИСТИКИ
+    
+    # 1. Константные колонки
+    constant_columns = [
+        col.name for col in summary.columns 
+        if col.unique == 1 and col.non_null > 0
+    ]
+    flags["has_constant_columns"] = len(constant_columns) > 0
+    flags["constant_columns"] = constant_columns
+    flags["n_constant_columns"] = len(constant_columns)
+    
+    # 2. Категориальные признаки с высокой кардинальностью (порог: >100)
+    high_card_cols = [
+        col.name for col in summary.columns
+        if not col.is_numeric and col.unique > 100
+    ]
+    flags["has_high_cardinality_categoricals"] = len(high_card_cols) > 0
+    flags["high_cardinality_columns"] = high_card_cols
+    flags["n_high_cardinality_columns"] = len(high_card_cols)
+
+    # 3. Проверка на потенциальные ID-колонки с дубликатами
+    potential_id_cols = []
+    for col in summary.columns:
+        col_name_lower = col.name.lower()
+        # Ищем колонки, которые могут быть идентификаторами
+        if ('id' in col_name_lower or 'key' in col_name_lower) and col.unique < summary.n_rows:
+            duplicate_ratio = 1.0 - (col.unique / summary.n_rows)
+            if duplicate_ratio > 0:  # есть дубликаты
+                potential_id_cols.append({
+                    "column": col.name,
+                    "unique_values": col.unique,
+                    "duplicate_ratio": duplicate_ratio,
+                    "description": f"Возможный ID с дубликатами ({col.unique} уникальных из {summary.n_rows})"
+                })
+    
+    flags["has_suspicious_id_duplicates"] = len(potential_id_cols) > 0
+    flags["suspicious_id_columns"] = potential_id_cols
+
     # Простейший «скор» качества
     score = 1.0
     score -= max_missing_share  # чем больше пропусков, тем хуже
@@ -192,6 +230,20 @@ def compute_quality_flags(summary: DatasetSummary, missing_df: pd.DataFrame) -> 
         score -= 0.2
     if summary.n_cols > 100:
         score -= 0.1
+
+    # Дополнение штрафов
+    if flags["has_constant_columns"]:
+        score -= 0.15 
+
+    
+    if flags["has_high_cardinality_categoricals"]:
+        score -= 0.1
+
+    if flags["has_suspicious_id_duplicates"]:
+            
+            score -= 0.25
+
+
 
     score = max(0.0, min(1.0, score))
     flags["quality_score"] = score

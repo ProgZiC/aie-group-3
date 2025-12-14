@@ -45,10 +45,36 @@ def overview(
     encoding: str = typer.Option("utf-8", help="Кодировка файла."),
 ) -> None:
     """
-    Напечатать краткий обзор датасета:
-    - размеры;
-    - типы;
-    - простая табличка по колонкам.
+    Строк: 36
+Столбцов: 14
+
+Колонки:
+                    name   dtype  non_null  missing  missing_share  unique  is_numeric    min    max        mean         std
+                 user_id   int64        36        
+0       0.000000      35        True 1001.0 1035.0 1018.194444   10.166667
+                 country  object        36        
+0       0.000000       4       False    NaN    NaN         NaN         NaN
+                    city  object        34        
+2       0.055556      16       False    NaN    NaN         NaN         NaN
+                  device  object        36        
+0       0.000000       3       False    NaN    NaN         NaN         NaN
+                 channel  object        36        
+0       0.000000       4       False    NaN    NaN         NaN         NaN
+       sessions_last_30d   int64        36        
+0       0.000000      26        True    0.0   34.0   11.944444    8.608781
+avg_session_duration_min float64        34        
+2       0.055556      32        True    2.0   15.2    7.247059    3.473382
+       pages_per_session float64        36        
+0       0.000000      32        True    1.0    7.5    4.100000    1.560586
+      purchases_last_30d   int64        36        
+0       0.000000       5        True    0.0    4.0    1.138889    1.125110
+        revenue_last_30d float64        36        
+0       0.000000      23        True    0.0 7000.0 1575.013889 1815.280578
+                 churned   int64        36        
+0       0.000000       2        True    0.0    1.0    0.333333    0.478091
+             signup_year   int64        36        0       0.000000       7        True 2018.0 2024.0 2020.972222    1.521017
+                    plan  object        36        0       0.000000       3       False    NaN    NaN         NaN         NaN
+       n_support_tickets   int64        36        0       0.000000       6        True    0.0    5.0    1.083333    1.204159
     """
     df = _load_csv(Path(path), sep=sep, encoding=encoding)
     summary: DatasetSummary = summarize_dataset(df)
@@ -136,7 +162,7 @@ def report(
 
         f.write("## Гистограммы числовых колонок\n\n")
         f.write("См. файлы `hist_*.png`.\n")
-
+        
     # 5. Картинки
     plot_histograms_per_column(df, out_root, max_columns=max_hist_columns)
     plot_missing_matrix(df, out_root / "missing_matrix.png")
