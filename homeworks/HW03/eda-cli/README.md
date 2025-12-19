@@ -58,6 +58,21 @@ uv run eda-cli report data/example.csv --out-dir reports
 uv run pytest -q
 ```
 
+Команда overview - быстрый обзор
+
+Выводит базовую статистику по датасету в консоль:
+bash
+
+uv run eda-cli overview data/example.csv
+
+
+Команда report - полный анализ
+
+Генерирует комплексный EDA-отчёт с визуализациями:
+bash
+
+uv run eda-cli report data/example.csv --out-dir reports_example
+
 Новые параметры команды report:
 
     --max-hist-columns (по умолчанию: 6) - ограничивает количество гистограмм для числовых колонок
