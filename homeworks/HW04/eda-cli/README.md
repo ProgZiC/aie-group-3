@@ -247,6 +247,463 @@ curl -X POST "http://127.0.0.1:8000/quality-from-csv" \
 
 ---
 
+### 5. `POST /quality-flags-from-csv` – эвристики по CSV-файлу,возвращает полный набор флагов качества
+
+Эндпоинт принимает CSV-файл, внутри:
+
+- читает его в `pandas.DataFrame`;
+- вызывает функции из `eda_cli.core`:
+
+  - `summarize_dataset`,
+  - `missing_table`,
+  - `compute_quality_flags`;
+
+
+**Запрос:**
+
+```http
+POST /quality-flags-from-csv
+Content-Type: multipart/form-data
+file: <CSV-файл>
+```
+
+Через Swagger:
+
+- в `/docs` открыть `POST /quality-flags-from-csv`,
+- нажать `Try it out`,
+- выбрать файл (например, `data/example.csv`),
+- нажать `Execute`.
+
+**Пример вызова через `curl` (Linux/macOS/WSL):**
+
+```bash
+curl -X POST "http://127.0.0.1:8000/quality-flags-from-csv" \
+  -F "file=@data/example.csv"
+```
+---
+
+Ответ будет содержать:
+
+
+- `flags` - булевы флаги из `compute_quality_flags`;
+- `dataset_shape` - реальные размеры датасета (`n_rows`, `n_cols`);
+- `latency_ms` - время обработки запроса.
+
+---
+
+**Пример ответа `200 OK`:**
+
+```json
+{
+  "flags": {
+    "too_few_rows": true,
+    "too_many_columns": false,
+    "too_many_missing": false,
+    "has_constant_columns": false,
+    "has_high_cardinality_categoricals": false,
+    "has_suspicious_id_duplicates": true
+  },
+  "dataset_shape": {
+    "n_rows": 36,
+    "n_cols": 14
+  },
+  "latency_ms": 18.32030015066266
+}
+```
+
+
+### 6. `POST /summary-from-csv` – JSON-сводка о датасете CSV-файла
+
+Эндпоинт принимает CSV-файл, внутри:
+
+- читает его в `pandas.DataFrame`;
+- вызывает функции из `eda_cli.core`:
+
+  - `summarize_dataset`,
+  - `missing_table`,
+  - `compute_quality_flags`;
+
+
+**Запрос:**
+
+```http
+POST /quality-from-csv
+Content-Type: multipart/form-data
+file: <CSV-файл>
+```
+
+Через Swagger:
+
+- в `/docs` открыть `POST /summary-from-csv`,
+- нажать `Try it out`,
+- выбрать файл (например, `data/example.csv`),
+- нажать `Execute`.
+
+**Пример вызова через `curl` (Linux/macOS/WSL):**
+
+```bash
+curl -X POST "http://127.0.0.1:8000/summary-from-csv" \
+  -F "file=@data/example.csv"
+```
+
+Ответ будет содержать:
+
+- `columns` - стастика по данным в датасете;
+- `quality_score` - интегральный скор качества;
+- `flags` - булевы флаги из `compute_quality_flags`;
+- `dataset_shape` - реальные размеры датасета (`n_rows`, `n_cols`);
+- `latency_ms` - время обработки запроса.
+
+**Пример ответа `200 OK`:**
+
+```json
+{
+  "summary": {
+    "shape": {
+      "n_rows": 36,
+      "n_cols": 14
+    },
+    "n_rows": 36,
+    "n_cols": 14,
+    "columns": [
+      {
+        "name": "user_id",
+        "dtype": "int64",
+        "non_null": 36,
+        "missing": 0,
+        "missing_share": 0,
+        "unique": 35,
+        "example_values": [
+          "1001",
+          "1002",
+          "1003"
+        ],
+        "is_numeric": true,
+        "min": 1001,
+        "max": 1035,
+        "mean": 1018.1944444444445,
+        "std": 10.166666666666666
+      },
+      {
+        "name": "country",
+        "dtype": "object",
+        "non_null": 36,
+        "missing": 0,
+        "missing_share": 0,
+        "unique": 4,
+        "example_values": [
+          "RU",
+          "KZ",
+          "BY"
+        ],
+        "is_numeric": false,
+        "min": null,
+        "max": null,
+        "mean": null,
+        "std": null
+      },
+      {
+        "name": "city",
+        "dtype": "object",
+        "non_null": 34,
+        "missing": 2,
+        "missing_share": 0.05555555555555555,
+        "unique": 16,
+        "example_values": [
+          "Moscow",
+          "Saint Petersburg",
+          "Almaty"
+        ],
+        "is_numeric": false,
+        "min": null,
+        "max": null,
+        "mean": null,
+        "std": null
+      },
+      {
+        "name": "device",
+        "dtype": "object",
+        "non_null": 36,
+        "missing": 0,
+        "missing_share": 0,
+        "unique": 3,
+        "example_values": [
+          "Desktop",
+          "Mobile",
+          "Tablet"
+        ],
+        "is_numeric": false,
+        "min": null,
+        "max": null,
+        "mean": null,
+        "std": null
+      },
+      {
+        "name": "channel",
+        "dtype": "object",
+        "non_null": 36,
+        "missing": 0,
+        "missing_share": 0,
+        "unique": 4,
+        "example_values": [
+          "Organic",
+          "Ads",
+          "Referral"
+        ],
+        "is_numeric": false,
+        "min": null,
+        "max": null,
+        "mean": null,
+        "std": null
+      },
+      {
+        "name": "sessions_last_30d",
+        "dtype": "int64",
+        "non_null": 36,
+        "missing": 0,
+        "missing_share": 0,
+        "unique": 26,
+        "example_values": [
+          "25",
+          "5",
+          "12"
+        ],
+        "is_numeric": true,
+        "min": 0,
+        "max": 34,
+        "mean": 11.944444444444445,
+        "std": 8.608781046763305
+      },
+      {
+        "name": "avg_session_duration_min",
+        "dtype": "float64",
+        "non_null": 34,
+        "missing": 2,
+        "missing_share": 0.05555555555555555,
+        "unique": 32,
+        "example_values": [
+          "12.5",
+          "4.2",
+          "8.3"
+        ],
+        "is_numeric": true,
+        "min": 2,
+        "max": 15.2,
+        "mean": 7.247058823529413,
+        "std": 3.473382361148563
+      },
+      {
+        "name": "pages_per_session",
+        "dtype": "float64",
+        "non_null": 36,
+        "missing": 0,
+        "missing_share": 0,
+        "unique": 32,
+        "example_values": [
+          "6.2",
+          "3.1",
+          "5.0"
+        ],
+        "is_numeric": true,
+        "min": 1,
+        "max": 7.5,
+        "mean": 4.099999999999999,
+        "std": 1.5605859705343283
+      },
+      {
+        "name": "purchases_last_30d",
+        "dtype": "int64",
+        "non_null": 36,
+        "missing": 0,
+        "missing_share": 0,
+        "unique": 5,
+        "example_values": [
+          "3",
+          "0",
+          "1"
+        ],
+        "is_numeric": true,
+        "min": 0,
+        "max": 4,
+        "mean": 1.1388888888888888,
+        "std": 1.1251102238772057
+      },
+      {
+        "name": "revenue_last_30d",
+        "dtype": "float64",
+        "non_null": 36,
+        "missing": 0,
+        "missing_share": 0,
+        "unique": 23,
+        "example_values": [
+          "4500.0",
+          "0.0",
+          "1200.0"
+        ],
+        "is_numeric": true,
+        "min": 0,
+        "max": 7000,
+        "mean": 1575.013888888889,
+        "std": 1815.2805784156387
+      },
+      {
+        "name": "churned",
+        "dtype": "int64",
+        "non_null": 36,
+        "missing": 0,
+        "missing_share": 0,
+        "unique": 2,
+        "example_values": [
+          "0",
+          "1"
+        ],
+        "is_numeric": true,
+        "min": 0,
+        "max": 1,
+        "mean": 0.3333333333333333,
+        "std": 0.47809144373375745
+      },
+      {
+        "name": "signup_year",
+        "dtype": "int64",
+        "non_null": 36,
+        "missing": 0,
+        "missing_share": 0,
+        "unique": 7,
+        "example_values": [
+          "2021",
+          "2020",
+          "2022"
+        ],
+        "is_numeric": true,
+        "min": 2018,
+        "max": 2024,
+        "mean": 2020.9722222222222,
+        "std": 1.5210167860651849
+      },
+      {
+        "name": "plan",
+        "dtype": "object",
+        "non_null": 36,
+        "missing": 0,
+        "missing_share": 0,
+        "unique": 3,
+        "example_values": [
+          "Pro",
+          "Free",
+          "Basic"
+        ],
+        "is_numeric": false,
+        "min": null,
+        "max": null,
+        "mean": null,
+        "std": null
+      },
+      {
+        "name": "n_support_tickets",
+        "dtype": "int64",
+        "non_null": 36,
+        "missing": 0,
+        "missing_share": 0,
+        "unique": 6,
+        "example_values": [
+          "1",
+          "0",
+          "2"
+        ],
+        "is_numeric": true,
+        "min": 0,
+        "max": 5,
+        "mean": 1.0833333333333333,
+        "std": 1.2041594578792296
+      }
+    ],
+    "missing_info": [
+      {
+        "missing_count": 2,
+        "missing_share": 0.05555555555555555
+      },
+      {
+        "missing_count": 2,
+        "missing_share": 0.05555555555555555
+      },
+      {
+        "missing_count": 0,
+        "missing_share": 0
+      },
+      {
+        "missing_count": 0,
+        "missing_share": 0
+      },
+      {
+        "missing_count": 0,
+        "missing_share": 0
+      },
+      {
+        "missing_count": 0,
+        "missing_share": 0
+      },
+      {
+        "missing_count": 0,
+        "missing_share": 0
+      },
+      {
+        "missing_count": 0,
+        "missing_share": 0
+      },
+      {
+        "missing_count": 0,
+        "missing_share": 0
+      },
+      {
+        "missing_count": 0,
+        "missing_share": 0
+      },
+      {
+        "missing_count": 0,
+        "missing_share": 0
+      },
+      {
+        "missing_count": 0,
+        "missing_share": 0
+      },
+      {
+        "missing_count": 0,
+        "missing_share": 0
+      },
+      {
+        "missing_count": 0,
+        "missing_share": 0
+      }
+    ],
+    "quality_flags": {
+      "too_few_rows": true,
+      "too_many_columns": false,
+      "max_missing_share": 0.05555555555555555,
+      "too_many_missing": false,
+      "has_constant_columns": false,
+      "constant_columns": [],
+      "n_constant_columns": 0,
+      "has_high_cardinality_categoricals": false,
+      "high_cardinality_columns": [],
+      "n_high_cardinality_columns": 0,
+      "has_suspicious_id_duplicates": true,
+      "suspicious_id_columns": [
+        {
+          "column": "user_id",
+          "unique_values": 35,
+          "duplicate_ratio": 0.02777777777777779,
+          "description": "Возможный ID с дубликатами (35 уникальных из 36)"
+        }
+      ],
+      "quality_score": 0.49444444444444446
+    }
+  },
+  "latency_ms": 20.446799928322434
+}
+```
+
+
 ## Структура проекта (упрощённо)
 
 ```text
