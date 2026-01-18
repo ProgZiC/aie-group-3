@@ -1,0 +1,20 @@
+{
+  "S07-hw-dataset-01.csv": {
+    "best_algorithm": "KMeans",
+    "best_k": 2,
+    "criteria": "max_silhouette",
+    "silhouette_score": 0.5216395622404242
+  },
+  "S07-hw-dataset-02.csv": {
+    "best_algorithm": "KMeans",
+    "best_k": 2,
+    "criteria": "max_silhouette",
+    "silhouette_score": 0.3068610017701601
+  },
+  "S07-hw-dataset-03.csv": {
+    "best_algorithm": "KMeans",
+    "best_k": 3,
+    "criteria": "max_silhouette",
+    "silhouette_score": 0.3155447003782518
+  }
+}
