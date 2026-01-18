@@ -1,0 +1,38 @@
+{
+  "Dummy": {
+    "model": "Dummy",
+    "accuracy": 0.5754166666666667,
+    "f1": 0.34045307443365697,
+    "roc_auc": 0.5136705855466965
+  },
+  "LogisticRegression": {
+    "model": "LogisticRegression",
+    "accuracy": 0.8275,
+    "f1": 0.7076271186440678,
+    "roc_auc": 0.8746905312071505
+  },
+  "DecisionTree": {
+    "model": "DecisionTree",
+    "accuracy": 0.8595833333333334,
+    "f1": 0.7654836464857342,
+    "roc_auc": 0.893605819282921
+  },
+  "RandomForest": {
+    "model": "RandomForest",
+    "accuracy": 0.92125,
+    "f1": 0.8704592186429061,
+    "roc_auc": 0.9648784660504799
+  },
+  "GradientBoosting": {
+    "model": "GradientBoosting",
+    "accuracy": 0.9191666666666667,
+    "f1": 0.8685636856368564,
+    "roc_auc": 0.9640024313137981
+  },
+  "Stacking": {
+    "model": "Stacking",
+    "accuracy": 0.9275,
+    "f1": 0.885676741130092,
+    "roc_auc": 0.9676700332639278
+  }
+}

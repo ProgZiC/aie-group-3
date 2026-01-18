@@ -1,0 +1,10 @@
+{
+  "best_model": "Stacking",
+  "best_metrics": {
+    "model": "Stacking",
+    "accuracy": 0.9275,
+    "f1": 0.885676741130092,
+    "roc_auc": 0.9676700332639278
+  },
+  "timestamp": "2026-01-18 22:54:43"
+}
