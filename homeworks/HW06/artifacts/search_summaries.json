@@ -1,0 +1,50 @@
+{
+  "DecisionTree": {
+    "best_params": {
+      "ccp_alpha": 0.001,
+      "criterion": "entropy",
+      "max_depth": 10,
+      "max_leaf_nodes": null,
+      "min_impurity_decrease": 0.0,
+      "min_samples_leaf": 10,
+      "min_samples_split": 2
+    },
+    "best_score": 0.9087971795472548,
+    "scoring": "roc_auc",
+    "cv_folds": 3,
+    "control_complexity": {
+      "max_depth": 10,
+      "min_samples_leaf": 10,
+      "min_samples_split": 2,
+      "min_impurity_decrease": 0.0,
+      "ccp_alpha": 0.001,
+      "max_leaf_nodes": null
+    }
+  },
+  "RandomForest": {
+    "best_params": {
+      "bootstrap": false,
+      "max_depth": 20,
+      "max_features": "log2",
+      "min_samples_leaf": 2,
+      "min_samples_split": 2,
+      "n_estimators": 100
+    },
+    "best_score": 0.9700057643746769,
+    "scoring": "roc_auc",
+    "cv_folds": 3
+  },
+  "GradientBoosting": {
+    "best_params": {
+      "learning_rate": 0.2,
+      "max_depth": 7,
+      "min_samples_leaf": 2,
+      "min_samples_split": 2,
+      "n_estimators": 150,
+      "subsample": 1.0
+    },
+    "best_score": 0.9727261029480129,
+    "scoring": "roc_auc",
+    "cv_folds": 3
+  }
+}

@@ -1,10 +1,94 @@
 {
-  "best_model": "Stacking",
-  "best_metrics": {
-    "model": "Stacking",
-    "accuracy": 0.9275,
-    "f1": 0.885676741130092,
-    "roc_auc": 0.9676700332639278
+  "best_model": "GradientBoosting",
+  "cv_score": 0.9727261029480129,
+  "test_metrics": {
+    "model": "GradientBoosting",
+    "accuracy": 0.9341666666666667,
+    "f1": 0.895364238410596,
+    "roc_auc": 0.9700942054745824,
+    "predict_time": 0.02424788475036621
   },
-  "timestamp": "2026-01-18 22:54:43"
+  "feature_importance": [
+    {
+      "feature": "num18",
+      "importance_mean": 0.07582715453760608,
+      "importance_std": 0.004996018960031583
+    },
+    {
+      "feature": "num19",
+      "importance_mean": 0.06951430856736589,
+      "importance_std": 0.003186398453203595
+    },
+    {
+      "feature": "num07",
+      "importance_mean": 0.03331407749733385,
+      "importance_std": 0.0012291154588552503
+    },
+    {
+      "feature": "num04",
+      "importance_mean": 0.015887651719059558,
+      "importance_std": 0.0016002250479823798
+    },
+    {
+      "feature": "num20",
+      "importance_mean": 0.011182139048296246,
+      "importance_std": 0.0015234213359867437
+    },
+    {
+      "feature": "num24",
+      "importance_mean": 0.010698177466863157,
+      "importance_std": 0.0014798932315413784
+    },
+    {
+      "feature": "num01",
+      "importance_mean": 0.008446434919506484,
+      "importance_std": 0.0010709514397521478
+    },
+    {
+      "feature": "num14",
+      "importance_mean": 0.007658638464273104,
+      "importance_std": 0.0008560955153662108
+    },
+    {
+      "feature": "num16",
+      "importance_mean": 0.0059592580366665485,
+      "importance_std": 0.0011182903588938763
+    },
+    {
+      "feature": "num22",
+      "importance_mean": 0.005846659006652844,
+      "importance_std": 0.0010372050852004283
+    },
+    {
+      "feature": "num08",
+      "importance_mean": 0.004565854959118465,
+      "importance_std": 0.0005041056806497811
+    },
+    {
+      "feature": "num13",
+      "importance_mean": 0.004125060306739181,
+      "importance_std": 0.0010006800886256655
+    },
+    {
+      "feature": "num21",
+      "importance_mean": 0.004094272129399312,
+      "importance_std": 0.0007512792389213067
+    },
+    {
+      "feature": "num17",
+      "importance_mean": 0.003865661977553303,
+      "importance_std": 0.0006041146664382991
+    },
+    {
+      "feature": "num02",
+      "importance_mean": 0.0020013902290386574,
+      "importance_std": 0.0007714197590030386
+    }
+  ],
+  "experiment_info": {
+    "dataset": "S06-hw-dataset-01.csv",
+    "random_state": 42,
+    "test_size": 0.2,
+    "timestamp": "2026-01-23 23:19:23"
+  }
 }
