@@ -1,0 +1,16 @@
+{
+  "dataset": "CIFAR10",
+  "model": "MLP",
+  "hidden_dims": [
+    256,
+    128
+  ],
+  "activation": "relu",
+  "dropout_p": 0.3,
+  "use_batchnorm": false,
+  "optimizer": "Adam",
+  "lr": 0.001,
+  "batch_size": 64,
+  "seed": 42,
+  "best_val_accuracy": 0.5320461783439491
+}
