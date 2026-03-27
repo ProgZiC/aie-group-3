@@ -9,8 +9,8 @@
   "seed": 42,
   "hyperparameters": {
     "lr": 0.001,
-    "epochs": 20,
-    "batch_size": 64,
+    "epochs": 15,
+    "batch_size": 32,
     "optimizer": "Adam"
   }
 }
