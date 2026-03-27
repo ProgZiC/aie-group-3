@@ -1,0 +1,16 @@
+{
+  "dataset": "CIFAR100",
+  "architecture": "ResNet18",
+  "transforms": {
+    "train": "transform_aug_resnet",
+    "val": "transform_base_resnet",
+    "test": "transform_base_resnet"
+  },
+  "seed": 42,
+  "hyperparameters": {
+    "lr": 0.001,
+    "epochs": 20,
+    "batch_size": 64,
+    "optimizer": "Adam"
+  }
+}

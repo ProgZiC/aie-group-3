@@ -1,0 +1,7 @@
+experiment_id,task,dataset,seed,model_summary,optimizer,lr,epochs_trained,best_val_accuracy,test_accuracy,precision,recall,mean_iou,notes
+C1,classification,CIFAR100,42,SimpleCNN,Adam,0.001,15,0.387,,,,
+C2,classification,CIFAR100,42,SimpleCNN,Adam,0.001,15,0.425,,,,
+C3,classification,CIFAR100,42,ResNet18,Adam,0.001,15,0.558,,,,
+C4,classification,CIFAR100,42,ResNet18,Adam,0.001,15,0.612,0.604,,,
+V1,detection,VOC2012,42,FasterRCNN_ResNet50_FPN,,,,,0.61,0.84,0.58,"score_threshold=0.3, IoU_threshold=0.5, samples=30"
+V2,detection,VOC2012,42,FasterRCNN_ResNet50_FPN,,,,,0.88,0.56,0.63,"score_threshold=0.7, IoU_threshold=0.5, samples=30"
