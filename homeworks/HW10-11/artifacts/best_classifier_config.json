@@ -7,6 +7,10 @@
     "test": "transform_base_resnet"
   },
   "seed": 42,
+  "learning_rate": 0.001,
+  "num_epochs": 15,
+  "batch_size": 32,
+  "optimizer": "Adam",
   "hyperparameters": {
     "lr": 0.001,
     "epochs": 15,

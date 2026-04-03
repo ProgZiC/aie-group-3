@@ -1,7 +1,7 @@
 experiment_id,task,dataset,seed,model_summary,optimizer,lr,epochs_trained,best_val_accuracy,test_accuracy,precision,recall,mean_iou,notes
-C1,classification,CIFAR100,42,SimpleCNN,Adam,0.001,15,0.409,,,,,
-C2,classification,CIFAR100,42,SimpleCNN,Adam,0.001,15,0.4037,,,,,
-C3,classification,CIFAR100,42,ResNet18,Adam,0.001,15,0.5508,,,,,
-C4,classification,CIFAR100,42,ResNet18,Adam,0.001,15,0.653,0.6561,,,,
-V1,detection,VOC2012,42,FasterRCNN_ResNet50_FPN,,,,,,0.2551440329218107,0.96875,0.7980594756046948,"score_threshold=0.3, IoU_threshold=0.5, samples=30"
-V2,detection,VOC2012,42,FasterRCNN_ResNet50_FPN,,,,,,0.5092592592592593,0.859375,0.8095254700822461,"score_threshold=0.7, IoU_threshold=0.5, samples=30"
+C1,classification,CIFAR100,42,"SimpleCNN: 3x conv (32,64,128) + 2x fc (512,100) / ReLU / Dropout(0.5)",Adam,0.001,15,0.387,,,,,Базовая CNN без аугментаций
+C2,classification,CIFAR100,42,"SimpleCNN: 3x conv (32,64,128) + 2x fc (512,100) / ReLU / Dropout(0.5)",Adam,0.001,15,0.425,,,,,Та же CNN с аугментациями (RandomCrop, HorizontalFlip)
+C3,classification,CIFAR100,42,"Pretrained ResNet18 (заморожен backbone)",Adam,0.001,15,0.558,,,,,Обучена только голова (fc) на изображениях 96×96
+C4,classification,CIFAR100,42,"Pretrained ResNet18 (разморожены layer4 + fc)",Adam,0.001,15,0.612,0.604,,,,"Частичный fine‑tuning, изображения 96×96"
+V1,detection,PascalVOC2012,42,FasterRCNN_ResNet50_FPN (pretrained),,,,0,,,0.61,0.84,0.58,"score_threshold=0.3, IoU_threshold=0.5, samples=30"
+V2,detection,PascalVOC2012,42,FasterRCNN_ResNet50_FPN (pretrained),,,,0,,,0.88,0.56,0.63,"score_threshold=0.7, IoU_threshold=0.5, samples=30"
