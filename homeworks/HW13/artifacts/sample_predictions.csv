@@ -1,0 +1,21 @@
+text,true_label,pred_label,confidence
+i feel very happy today,joy,joy,0.867085352878269
+i am so sad about this news,surprise,surprise,0.9193247674155778
+this movie made me cry,fear,fear,0.8548143929561306
+i love you so much,anger,anger,0.9773048562910295
+i'm afraid of the dark,sadness,sadness,0.8862291974240023
+i can't believe this happened,sadness,sadness,0.9427531198095574
+what a wonderful surprise,sadness,sadness,0.8936395506525175
+i hate everything right now,surprise,surprise,0.9228095229648935
+you are my best friend,anger,anger,0.9265394391080591
+i feel so lonely,fear,fear,0.8758796237735738
+i'm so angry at you,sadness,sadness,0.9857418478870382
+that's terrifying!,surprise,surprise,0.958518595270556
+i'm surprised you came,fear,fear,0.9815298518189864
+my heart is full of joy,joy,love,0.7184482051282947
+i'm devastated,sadness,fear,0.6293699936433256
+you scared me,sadness,sadness,0.9790623929032364
+i adore you,joy,joy,0.8623889502872687
+i'm furious,love,love,0.8774376007386803
+i'm shocked,love,love,0.8563318204474754
+i'm feeling down,joy,joy,0.895546246306857
